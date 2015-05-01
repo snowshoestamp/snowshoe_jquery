@@ -44,7 +44,7 @@ var stampScreenInitData = {
 
 Load Animation
 --
-This module comes with the ability to trigger a loading animation as soon as a stamp is touched to the screen.  It comes prebaked with pure CSS animations by [Connor Atherton](http://connoratherton.com/loaders).  To use this feature,
+**Note:** This feature currently works only when stamp data is sent via AJAX. This module comes with the ability to trigger a loading animation as soon as a stamp is touched to the screen.  It comes prebaked with pure CSS animations by [Connor Atherton](http://connoratherton.com/loaders).  To use this feature,
 
 1\. Include `snowshoe.min.css`.  The loading animations are CSS-based and optimized for quick load times.  
 2\. Create a set of divs with the following structure and place the id’s `#snowshoe-progress-bar` and `#loader` appropriately.

@@ -42,9 +42,9 @@ var stampScreenInitData = {
 <script src="jquery.snowshoe.js"></script>
 ```
 
-Load Animation
+Progress Bar Animation
 --
-**Note:** This feature currently works only when stamp data is sent via AJAX. This module comes with the ability to trigger a loading animation as soon as a stamp is touched to the screen.  It comes prebaked with pure CSS animations by [Connor Atherton](http://connoratherton.com/loaders).  To use this feature,
+This module comes with the ability to trigger a loading animation as soon as a stamp is touched to the screen.  It comes prebaked with pure CSS animations by [Connor Atherton](http://connoratherton.com/loaders).  To use this feature,
 
 1\. Include `snowshoe.min.css`.  The loading animations are CSS-based and optimized for quick load times.  
 2\. Create a set of divs with the following structure and place the id’s `#snowshoe-progress-bar` and `#loader` appropriately.
@@ -62,7 +62,7 @@ Load Animation
 
 3\. Change the first two classes on the div with the id `#loader` to reference the load animation of your choice.  Animation options can be found [here](http://connoratherton.com/loaders).
 
-4\. Add the `progressBarOn` key to the initialization data object at the bottom of the page and set its value to `true`.  The plugin will now handle the load animation by dynamically adding/removing the class `.snowshoe-progress-bar` from the element that wears the id `#snowshoe-progress-bar`.
+4\. Add the `progressBarOn` key to the initialization data object at the bottom of the page and set its value to `true`.  The plugin will now handle the load animation by dynamically adding the class `.snowshoe-progress-bar` to the element that wears the id `#snowshoe-progress-bar`.
 
 ```javascript
 <script>
@@ -84,9 +84,9 @@ var stampScreenInitData = {
 <script src="jquery.snowshoe.js"></script>
 ```
 
-The Snowshoe jQuery module dynamically adds the load animation whenever 5 simultaneous touch events occur (i.e. a user touches a stamp to a screen).  It also removes the load animation after the request has completed and the user is redirected to the success screen.
+The Snowshoe jQuery module dynamically adds the load animation whenever 5 simultaneous touch events occur (i.e. a user touches a stamp to a screen).
 
-The standard stamp screen and load animation come with the following CSS styles and are used in [this demo](http://wfdemo.herokuapp.com/).  Feel free to override any of them with your own CSS. **Note:** For the stamp screen, please ensure that the width and height are large enough to accomodate the full physical dimensions of your SnowShoe stamp.  We suggest keeping the whole page stampable.
+The standard stamp screen and load animation come with the following CSS styles and are used in [this demo](http://demo.snowshoestamp.com/).  Feel free to override any of them with your own CSS. **Note:** For the stamp screen, please ensure that the width and height are large enough to accomodate the full physical dimensions of your SnowShoe stamp.  We suggest keeping the whole page stampable.
 
 ```css
 /*STAMP SCREEN*/

@@ -36,6 +36,7 @@ See GitHub project page for Documentation and License
 
         function showSpinner() {
             $('#snowshoe-progress-bar').addClass("snowshoe-progress-bar");
+            $('#loader').removeClass("loader-hidden");
         };
 
         function send(points, postViaAjax){

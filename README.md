@@ -86,7 +86,7 @@ var stampScreenInitData = {
 
 The Snowshoe jQuery module dynamically adds the load animation whenever 5 simultaneous touch events occur (i.e. a user touches a stamp to a screen).
 
-The standard stamp screen and load animation come with the following CSS styles and are used in [this demo](http://demo.snowshoestamp.com/).  Feel free to override any of them with your own CSS. **Note:** For the stamp screen, please ensure that the width and height are large enough to accomodate the full physical dimensions of your SnowShoe stamp.  We suggest keeping the whole page stampable.
+The standard stamp screen and load animation come with the following CSS styles and are used in [this demo](http://demo.snowshoestamp.com/).  Feel free to override any of them with your own CSS. **Note:** For the stamp screen html element, please ensure that the width and height are large enough to accommodate the full physical dimensions of your SnowShoe stamp.  We suggest keeping the whole page stampable.
 
 ```css
 /*STAMP SCREEN*/

@@ -44,25 +44,24 @@ var stampScreenInitData = {
 
 Progress Bar Animation
 --
-This module comes with the ability to trigger a loading animation as soon as a stamp is touched to the screen.  It comes prebaked with pure CSS animations by [Connor Atherton](http://connoratherton.com/loaders).  To use this feature,
+This module comes with the ability to trigger a loading animation as soon as a stamp is touched to the screen.  It comes prebaked with a simple CSS animation of loading dots courtesy of [Ken Lauguico](http://codepen.io/kenlauguico/).  To use this feature,
 
-1\. Include `snowshoe.min.css`.  The loading animations are CSS-based and optimized for quick load times.  
-2\. Create a set of divs with the following structure and place the id’s `#snowshoe-progress-bar` and `#loader` appropriately.
+1\. Include `snowshoe.min.css`.  The loading animations are CSS-based and optimized for quick load times.
+
+```html
+<!-- Snowshoe loader CSS -->
+<link rel="stylesheet" href="snowshoe.min.css">
+
+```
+
+2\. Create a div with the id of `#snowshoe-progress-bar`.
 
 ```html
 <!-- Snowshoe loader -->
-<div id="snowshoe-progress-bar">
-  <div id="loader" class="loader-inner ball-scale-multiple loader-hidden">
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-</div>
+<div id="snowshoe-progress-bar"></div>
 ```
 
-3\. Change the first two classes on the div with the id `#loader` to reference the load animation of your choice.  Animation options can be found [here](http://connoratherton.com/loaders).
-
-4\. Add the `progressBarOn` key to the initialization data object at the bottom of the page and set its value to `true`.  The plugin will now handle the load animation by dynamically adding the class `.snowshoe-progress-bar` to the element that wears the id `#snowshoe-progress-bar`.
+3\. Add the `progressBarOn` key to the initialization data object at the bottom of the page and set its value to `true`.  The plugin will now handle the load animation by dynamically adding the class `.snowshoe-progress-bar` to the element that wears the id `#snowshoe-progress-bar`.
 
 ```javascript
 <script>
@@ -84,68 +83,9 @@ var stampScreenInitData = {
 <script src="jquery.snowshoe.js"></script>
 ```
 
-The Snowshoe jQuery module dynamically adds the load animation whenever 5 simultaneous touch events occur (i.e. a user touches a stamp to a screen).
+The Snowshoe jQuery module dynamically adds the load animation class whenever 5 simultaneous touch events occur (i.e. a user touches a stamp to a screen).
 
-The standard stamp screen and load animation come with the following CSS styles and are used in [this demo](http://demo.snowshoestamp.com/).  Feel free to override any of them with your own CSS. **Note:** For the stamp screen html element, please ensure that the width and height are large enough to accommodate the full physical dimensions of your SnowShoe stamp.  We suggest keeping the whole page stampable.
-
-```css
-/*STAMP SCREEN*/
-#stamp-screen {
-  height:100%;
-  width:100%;
-  position:absolute;
-  min-height:480px;
-  top:0;
-  left:0;
-  overflow:hidden;
-  text-align:center;
-  -webkit-user-select:none;
-  -moz-user-select:none;
-  -ms-user-select:none;
-  user-select:none;
-  -webkit-touch-callout:none;
-  -webkit-user-drag:none;
-  -webkit-tap-highlight-color:rgba(0,0,0,0);
-  -webkit-background-size:cover;
-  -moz-background-size:cover;
-  -o-background-size:cover;
-  background-size:cover;
-}
-
-/* LOADING ANIMATION CONTAINER */
-.snowshoe-progress-bar {
-  background:black;
-  background:rgba(0,0,0,.75);
-  position:absolute;
-  top:0;
-  left:0;
-  height:100%;
-  width:100%;
-  min-height:480px;
-  text-align:center;
-  -webkit-user-select:none;
-  -moz-user-select:none;
-  -ms-user-select:none;
-  user-select:none;
-  -webkit-touch-callout:none;
-  -webkit-user-drag:none;
-  -webkit-tap-highlight-color:rgba(0,0,0,0);
-  -webkit-background-size:cover;
-  -moz-background-size:cover;
-  -o-background-size:cover;
-  background-size:cover
-}
-
-/* Positions the load animation */
-#loader {
-  position:absolute;
-  top:50%;
-  left:49%
-}
-```
-Also, if you’d like to implement your own loader, simply remove the `progressBarOn` key from your initialization data object or set it to `false`.
-
-If you have any questions, we’re just a click away -  [support@snow.sh](mailto:support@snow.sh).
+Feel free to override any of the CSS with your own. Also, if you’d like to implement your own loader, simply remove the `progressBarOn` key from your initialization data object or set it to `false`.
 
 ## Contribute
 Join us in improving this client by making a pull request.

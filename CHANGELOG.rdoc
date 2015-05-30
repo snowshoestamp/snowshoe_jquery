@@ -1,5 +1,0 @@
-== 0.2.0
-* Add progress bar animations
-
-== 0.1.0
-* Initial release

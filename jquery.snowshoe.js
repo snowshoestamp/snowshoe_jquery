@@ -12,6 +12,7 @@ See GitHub project page for Documentation and License
         var stampScreenElmId = configs.stampScreenElmId || "snowshoe-stamp-screen";
         var progressBarOn = configs.progressBarOn || false;
         var postViaAjax = configs.postViaAjax || false;
+        var helpMessage = configs.messages.insufficientPoints;
         var postUrl = configs.postUrl || "/stampscreen";
         var success = configs.success || {};
         var error = configs.error || {};
@@ -21,6 +22,10 @@ See GitHub project page for Documentation and License
         var pollOpen = false;
 
         stampScreenElm.addEventListener('touchstart', function(event) {
+          $("#snowshoe-messages").empty();
+          if (event.touches.length == 4 && helpMessage) {
+            $("#snowshoe-messages").append(helpMessage);
+          };
           if (event.touches.length >= 5) {
             var data = [];
             var touches = event.touches;

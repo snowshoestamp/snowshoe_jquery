@@ -11,6 +11,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 /*STAMP SCREEN*/
+#snowshoe-messages {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  top: 10%;
+}
 .snowshoe-progress-bar {
   display: block;
   width: 1em;

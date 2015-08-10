@@ -87,6 +87,77 @@ The Snowshoe jQuery module dynamically adds the load animation class whenever 5 
 
 Feel free to override any of the CSS with your own. Also, if you’d like to implement your own loader, simply remove the `progressBarOn` key from your initialization data object or set it to `false`.
 
+Help Messages
+--
+If a user is having trouble with their stamp, displaying help messages to them can be useful.
+
+1\. Include `snowshoe.min.css`.  This includes a default styling to display the messages. Feel free (and you should) customize this css as needed.
+
+```html
+<!-- Snowshoe messages CSS -->
+<link rel="stylesheet" href="snowshoe.min.css">
+
+```
+
+2\. Create a div with the id of `#snowshoe-messages`.
+
+```html
+<!-- Snowshoe messages -->
+<div id="snowshoe-messages"></div>
+```
+
+3\. To add helpful messaging for when a user isn't touching the stamp to the screen fully, inset an html block in the initialization data.
+
+```javascript
+<script>
+var stampScreenInitData = {
+  "postUrl": "http://mydomain.com/stampscreen",
+  "stampScreenElmId": "stamp-screen",
+  "progressBarOn": true,
+  "messages": {
+    "insufficientPoints" : "<h3>Try again!</h3>"
+  },
+  "postViaAjax": true,
+  "success": function(response){
+    // handle success
+    console.log("Success!");
+  },
+  "error": function(response){
+    // handle failure
+    console.log(" :-( ");
+  }
+}
+</script>
+<script src="jquery.snowshoe.js"></script>
+```
+
+4\. If you are using ajax to send stamp data to your backend, you can likewise append a helpful error messaging html block in the error callback to let your users know that a stamp wasn't recognized.
+
+```javascript
+<script>
+var stampScreenInitData = {
+  "postUrl": "http://mydomain.com/stampscreen",
+  "stampScreenElmId": "stamp-screen",
+  "progressBarOn": true,
+  "messages": {
+    "insufficientPoints" : "<h3>Try again!</h3>"
+  },
+  "postViaAjax": true,
+  "success": function(response){
+    // handle success
+    console.log("Success!");
+  },
+  "error": function(response){
+    // handle failure
+    $("#snowshoe-messages").append("<h3>That stamp was not found. Please try again!</h3>");
+  }
+}
+</script>
+<script src="jquery.snowshoe.js"></script>
+```
+
+Again, feel free to override any of snowshoe.css with your own, just be sure to keep the element id `#snowshoe-messages` on the div you want to append your help message html blocks to.
+
 ## Contribute
 Join us in improving this client by making a pull request.
 

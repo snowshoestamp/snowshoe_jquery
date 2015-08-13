@@ -1,7 +1,7 @@
 /*
 Snowshoe jQuery (https://github.com/snowshoestamp/snowshoe_jquery)
 jquery.snowshoe.js
-Version 0.1.0
+Version 0.2.1
 See GitHub project page for Documentation and License
 */
 
@@ -29,7 +29,7 @@ See GitHub project page for Documentation and License
           if (event.touches.length >= 5) {
             var data = [];
             var touches = event.touches;
-            for (var i = 0; i <= Object.keys(event).length; i++) {
+            for (var i = 0; i <= event.touches.length; i++) {
               if (touches[i]) {
                 data.push([touches[i].pageX, touches[i].pageY]);
               }

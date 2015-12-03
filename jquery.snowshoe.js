@@ -5,12 +5,17 @@ Version 0.2.1
 See GitHub project page for Documentation and License
 */
 
+// Global variables to clear timers for animations and messages
+var removePulseTimerId;
+var showMessageTimerId;
+
 (function($) {
   $.snowshoe = {
     stampScreen: {
       init: function(configs, client){
         var stampScreenElmId = configs.stampScreenElmId || "snowshoe-stamp-screen";
         var progressBarOn = configs.progressBarOn || false;
+        var recognitionAnimationOn = configs.recognitionAnimationOn || false;
         var postViaAjax = configs.postViaAjax || false;
         var messages = configs.messages || {};
         var helpMessage = messages.insufficientPoints || "";
@@ -24,9 +29,16 @@ See GitHub project page for Documentation and License
 
         stampScreenElm.addEventListener('touchstart', function(event) {
           $("#snowshoe-messages").empty();
-          if (event.touches.length == 4 && helpMessage) {
-            $("#snowshoe-messages").append(helpMessage);
+
+          if (event.touches.length >= 3 && recognitionAnimationOn) {
+            $.snowshoe.animation.showRecognitionPulse();
           };
+
+          if (helpMessage && (event.touches.length == 3 || event.touches.length == 4)) {
+            // $("#snowshoe-messages").empty();
+            $.snowshoe.animation.showHelpMessages(helpMessage);
+          };
+
           if (event.touches.length >= 5) {
             var data = [];
             var touches = event.touches;
@@ -36,13 +48,18 @@ See GitHub project page for Documentation and License
               }
             }
             send(data, postViaAjax);
-            if(progressBarOn){showSpinner()};
+            if(progressBarOn){$.snowshoe.animation.showSpinner()};
           }
         });
 
-        function showSpinner() {
-            $('#snowshoe-progress-bar').addClass("snowshoe-progress-bar");
-        };
+        stampScreenElm.addEventListener('touchend', function(event) {
+          if (event.touches.length <= 5 && recognitionAnimationOn) {
+            $.snowshoe.animation.removeRecognitionPulse();
+            clearTimeout(removePulseTimerId);
+            clearTimeout(showMessageTimerId);
+            console.log('cleared');
+          };
+        });
 
         function send(points, postViaAjax){
           if (postViaAjax){
@@ -51,6 +68,31 @@ See GitHub project page for Documentation and License
             client.post(points, postUrl);
           }
         }
+      }
+    },
+
+    animation: {
+      showSpinner: function() {
+        $('#snowshoe-progress-bar').addClass("snowshoe-progress-bar");
+      },
+
+      removeSpinner: function() {
+        $('#snowshoe-progress-bar').removeClass("snowshoe-progress-bar");
+      },
+
+      showHelpMessages: function(helpMessage) {
+        showMessageTimerId = setTimeout(function(){$("#snowshoe-messages").empty();$("#snowshoe-messages").append(helpMessage);}, 3000);
+      },
+
+      showRecognitionPulse: function() {
+        $('#snowshoe-recognition-bar').addClass("snowshoe-recognition-bar");
+        var removePulse = $.snowshoe.animation.removeRecognitionPulse;
+        removePulseTimerId = setTimeout(removePulse, 3000);
+      },
+
+      removeRecognitionPulse: function() {
+        $('#snowshoe-recognition-bar').removeClass("snowshoe-recognition-bar");
+        console.log('removed');
       }
     },
 
@@ -65,6 +107,8 @@ See GitHub project page for Documentation and License
           'type': "POST",
           'error': function(response) {
             cbkError(response.responseJSON);
+            $.snowshoe.animation.removeSpinner();
+            $.snowshoe.animation.removeRecognitionPulse();
           },
           'success': function(response) {
             cbk(response);

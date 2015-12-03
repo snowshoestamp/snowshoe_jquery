@@ -22,7 +22,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   width: 1em;
   height: 1em;
   border-radius: 1em;
-  background-color: #fff;
+  background-color: #888;
   position: absolute;
   top: -90%;
   bottom: 0;
@@ -64,6 +64,20 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   -o-animation: dim 1s 1s infinite alternate;
   animation: dim 1s 1s infinite alternate;
 }
+
+.snowshoe-recognition-bar {
+    background: rgba(255,255,255,.9);
+    -webkit-border-radius: 30px;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left:0;
+    top:0;
+    -webkit-animation: pulsate 1.1s ease-out;
+    -webkit-animation-iteration-count: infinite; 
+    opacity: 0.0
+}
+
 /* Keyframes */
 @-moz-keyframes dim {
   from {
@@ -96,4 +110,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   to {
     background-color: rgba(255,255,255,0.2);
   }
+}
+
+
+@-webkit-keyframes pulsate {
+    0% {-webkit-transform: scale(0.7, 0.4); opacity: 0.0;}
+    50% {opacity: 1.0;}
+    100% {-webkit-transform: scale(1.2, 1.2); opacity: 0.0;}
 }

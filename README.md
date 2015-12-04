@@ -2,12 +2,14 @@ Snowshoe jQuery
 ============
 Front-end client to submit Snowshoe stamp point data to your backend.
 
+## Current Version
+- 0.3.0
+
 ## Dependencies
 - jQuery (>= 1.8.x)
 
 ## Usage
-Stamp screen
---
+### Stamp screen
 At the bottom of any page you want to make "stampable", create an object with initialization data and include the Snowshoe jQuery module. ``$.snowshoe`` will construct the necessary touch event listener and client to submit stamp data to your backend.
 
 ```javascript
@@ -42,8 +44,7 @@ var stampScreenInitData = {
 <script src="jquery.snowshoe.js"></script>
 ```
 
-Progress Bar Animation
---
+### Progress Bar Animation
 This module comes with the ability to trigger a loading animation as soon as a stamp is touched to the screen.  It comes prebaked with a simple CSS animation of loading dots courtesy of [Ken Lauguico](http://codepen.io/kenlauguico/).  To use this feature,
 
 1\. Include `snowshoe.min.css`.  The loading animations are CSS-based and optimized for quick load times.
@@ -87,8 +88,7 @@ The Snowshoe jQuery module dynamically adds the load animation class whenever 5 
 
 Feel free to override any of the CSS with your own. Also, if you’d like to implement your own loader, simply remove the `progressBarOn` key from your initialization data object or set it to `false`.
 
-Help Messages
---
+### Help Messages
 If a user is having trouble with their stamp, displaying help messages to them can be useful.
 
 1\. Include `snowshoe.min.css`.  This includes a default styling to display the messages. Feel free (and you should) customize this css as needed.
@@ -116,15 +116,6 @@ var stampScreenInitData = {
   "progressBarOn": true,
   "messages": {
     "insufficientPoints" : "<h3>Try again!</h3>"
-  },
-  "postViaAjax": true,
-  "success": function(response){
-    // handle success
-    console.log("Success!");
-  },
-  "error": function(response){
-    // handle failure
-    console.log(" :-( ");
   }
 }
 </script>
@@ -146,9 +137,17 @@ var stampScreenInitData = {
   "success": function(response){
     // handle success
     console.log("Success!");
+    // clear screen
+    $('#snowshoe-progress-bar').removeClass("snowshoe-progress-bar");
+    $("#snowshoe-messages").empty();
   },
   "error": function(response){
     // handle failure
+    console.log(" :-( ");
+    // clear screen
+    $('#snowshoe-progress-bar').removeClass("snowshoe-progress-bar");
+    $("#snowshoe-messages").empty();
+    // show failure message
     $("#snowshoe-messages").append("<h3>That stamp was not found. Please try again!</h3>");
   }
 }
@@ -160,6 +159,11 @@ Again, feel free to override any of snowshoe.css with your own, just be sure to 
 
 ## Contribute
 Join us in improving this client by making a pull request.
+
+Be sure to, as necessary:
+- Increment jquery.snowshoe.js version (in comment header)
+- Update the CHANGELOG
+- Update this README
 
 ## License
 MIT (see LICENSE file)

@@ -1,3 +1,6 @@
+## 0.3.0
+* Allow dynamic minimum point detection limit
+
 ## 0.2.2
 * Fix undeclared messages object error
 

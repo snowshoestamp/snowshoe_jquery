@@ -1,5 +1,6 @@
 ## 0.3.0
 * Allow dynamic minimum point detection limit
+* Upgraded stamp recognition animation
 
 ## 0.2.2
 * Fix undeclared messages object error

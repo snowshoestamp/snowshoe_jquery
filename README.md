@@ -45,13 +45,13 @@ var stampScreenInitData = {
 ```
 
 ### Progress Bar Animation
-This module comes with the ability to trigger a loading animation as soon as a stamp is touched to the screen.  It comes prebaked with a simple CSS animation of loading dots courtesy of [Ken Lauguico](http://codepen.io/kenlauguico/).  To use this feature,
+This module comes with the ability to trigger a loading animation as soon as a stamp is touched to the screen.  To use this feature,
 
-1\. Include `snowshoe.min.css`.  The loading animations are CSS-based and optimized for quick load times.
+1\. Include `snowshoe-sample.css`.  The loading animation is CSS-based and optimized for quick load times.
 
 ```html
 <!-- Snowshoe loader CSS -->
-<link rel="stylesheet" href="snowshoe.min.css">
+<link rel="stylesheet" href="snowshoe-sample.css">
 
 ```
 
@@ -91,11 +91,11 @@ Feel free to override any of the CSS with your own. Also, if you’d like to imp
 ### Help Messages
 If a user is having trouble with their stamp, displaying help messages to them can be useful.
 
-1\. Include `snowshoe.min.css`.  This includes a default styling to display the messages. Feel free (and you should) customize this css as needed.
+1\. Include `snowshoe-sample.css`.  This includes default styling to display the messages. Feel free (and you should) customize this css as needed.
 
 ```html
 <!-- Snowshoe messages CSS -->
-<link rel="stylesheet" href="snowshoe.min.css">
+<link rel="stylesheet" href="snowshoe-sample.css">
 
 ```
 
@@ -106,7 +106,7 @@ If a user is having trouble with their stamp, displaying help messages to them c
 <div id="snowshoe-messages"></div>
 ```
 
-3\. To add helpful messaging for when a user isn't touching the stamp to the screen fully, inset an html block in the initialization data.
+3\. To add helpful messaging for when a user isn't touching the stamp to the screen fully, insert an html block in the initialization data.
 
 ```javascript
 <script>
@@ -155,7 +155,7 @@ var stampScreenInitData = {
 <script src="jquery.snowshoe.js"></script>
 ```
 
-Again, feel free to override any of snowshoe.css with your own, just be sure to keep the element id `#snowshoe-messages` on the div you want to append your help message html blocks to.
+Again, feel free to override any of snowshoe-sample.css with your own, just be sure to keep the element id `#snowshoe-messages` on the div you want to append your help message html blocks to.
 
 ## Contribute
 Join us in improving this client by making a pull request.
@@ -164,6 +164,7 @@ Be sure to, as necessary:
 - Increment jquery.snowshoe.js version (in comment header)
 - Update the CHANGELOG
 - Update this README
+- Include jquery.snowshoe.js version in your commit message
 
 ## License
 MIT (see LICENSE file)

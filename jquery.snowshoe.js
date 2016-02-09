@@ -12,7 +12,8 @@ See GitHub project page for Documentation and License
         var stampScreenElmId = configs.stampScreenElmId || "snowshoe-stamp-screen";
         var progressBarOn = configs.progressBarOn || false;
         var postViaAjax = configs.postViaAjax || false;
-        var helpMessage = configs.messages.insufficientPoints;
+        var messages = configs.messages || {};
+        var helpMessage = messages.insufficientPoints || "";
         var postUrl = configs.postUrl || "/stampscreen";
         var success = configs.success || {};
         var error = configs.error || {};

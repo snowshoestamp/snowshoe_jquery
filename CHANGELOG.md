@@ -1,3 +1,6 @@
+## 0.2.2
+* Fix undeclared messages object error
+
 ## 0.2.1
 * Better support for Android Chrome touch events
 

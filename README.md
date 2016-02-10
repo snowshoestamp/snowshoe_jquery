@@ -74,10 +74,14 @@ var stampScreenInitData = {
   "success": function(response){
     // handle success
     console.log("Success!");
+    // clear animation
+    $('#snowshoe-progress-bar').removeClass("snowshoe-progress-bar");
   },
   "error": function(response){
     // handle failure
     console.log(" :-( ");
+    // clear animation
+    $('#snowshoe-progress-bar').removeClass("snowshoe-progress-bar");
   }
 }
 </script>
@@ -89,7 +93,7 @@ The Snowshoe jQuery module dynamically adds the load animation class whenever 5 
 Feel free to override any of the CSS with your own. Also, if you’d like to implement your own loader, simply remove the `progressBarOn` key from your initialization data object or set it to `false`.
 
 ### Help Messages
-If a user is having trouble with their stamp, displaying help messages to them can be useful.
+If a user is having trouble with their stamp, displaying help messages to them can be useful. With our new Stamp 2.0 hardware, it helps to stamp and hold for a couple seconds on some devices. We've added dynamic messaging to this module allowing you to display custom messaging onscreen that will guide users toward best stamping practices.
 
 1\. Include `snowshoe-sample.css`.  This includes default styling to display the messages. Feel free (and you should) customize this css as needed.
 
@@ -106,7 +110,7 @@ If a user is having trouble with their stamp, displaying help messages to them c
 <div id="snowshoe-messages"></div>
 ```
 
-3\. To add helpful messaging for when a user isn't touching the stamp to the screen fully, insert an html block in the initialization data.
+3\. To add helpful messaging for when a user isn't touching the stamp to the screen fully, insert an html block in the initialization data. First, a user will see a "Keep holding" message for 2 seconds, followed by whatever you place here.
 
 ```javascript
 <script>

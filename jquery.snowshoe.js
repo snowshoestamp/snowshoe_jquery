@@ -20,9 +20,11 @@ See GitHub project page for Documentation and License
         var points = [];
         var stampScreenElm = document.getElementById(stampScreenElmId);
         var pointsMin = configs.insufficientPointsMin || 3;
-
+        var holdMsg;
+        
         stampScreenElm.addEventListener('touchstart', function(event) {
           $("#snowshoe-messages").empty();
+          clearTimeout(holdMsg);
           if (event.touches.length >= pointsMin && progressAnimationOn) {
             $('#snowshoe-progress-bar').addClass("snowshoe-progress-bar");
           };
@@ -40,9 +42,17 @@ See GitHub project page for Documentation and License
 
           if (event.touches.length < 5 && event.touches.length >= pointsMin ) {
             $('#snowshoe-progress-bar').removeClass("snowshoe-progress-bar");
-            if (helpMessage) { $("#snowshoe-messages").append(helpMessage) };
+            // Teach users to stamp and hold for 2 seconds before displaying user-defined message
+            if (helpMessage) { 
+              $("#snowshoe-messages").append("<h3>Keep holding</h3>");
+              holdMsg = setTimeout(function(){ displayCustomMessage(helpMessage) }, 2000);
+            }
           }
         });
+
+        function displayCustomMessage(helpMsg) {
+          if (helpMsg) { $("#snowshoe-messages").children().replaceWith(helpMsg); }
+        };
 
         function send(points, postViaAjax){
           if (postViaAjax){

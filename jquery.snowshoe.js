@@ -10,10 +10,11 @@ See GitHub project page for Documentation and License
     stampScreen: {
       init: function(configs, client){
         var stampScreenElmId = configs.stampScreenElmId || "snowshoe-stamp-screen";
-        var progressAnimationOn = configs.progressAnimation || configs.progressBarOn || false;
+        var progressAnimationOn = configs.progressBarOn || false;
         var postViaAjax = configs.postViaAjax || false;
         var messages = configs.messages || {};
         var helpMessage = messages.insufficientPoints || "";
+        var holdMessage = messages.userTraining || "";
         var postUrl = configs.postUrl || "/stampscreen";
         var success = configs.success || {};
         var error = configs.error || {};
@@ -21,7 +22,7 @@ See GitHub project page for Documentation and License
         var stampScreenElm = document.getElementById(stampScreenElmId);
         var pointsMin = configs.insufficientPointsMin || 3;
         var holdMsg;
-        
+
         stampScreenElm.addEventListener('touchstart', function(event) {
           $("#snowshoe-messages").empty();
           clearTimeout(holdMsg);
@@ -44,14 +45,14 @@ See GitHub project page for Documentation and License
             $('#snowshoe-progress-bar').removeClass("snowshoe-progress-bar");
             // Teach users to stamp and hold for 2 seconds before displaying user-defined message
             if (helpMessage) { 
-              $("#snowshoe-messages").append("<h3>Keep holding</h3>");
+              $("#snowshoe-messages").append(holdMessage);
               holdMsg = setTimeout(function(){ displayCustomMessage(helpMessage) }, 2000);
             }
           }
         });
 
         function displayCustomMessage(helpMsg) {
-          if (helpMsg) { $("#snowshoe-messages").children().replaceWith(helpMsg); }
+          $("#snowshoe-messages").children().replaceWith(helpMsg);
         };
 
         function send(points, postViaAjax){

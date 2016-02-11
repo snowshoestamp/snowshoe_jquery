@@ -92,6 +92,16 @@ The Snowshoe jQuery module dynamically adds the load animation class whenever 5 
 
 Feel free to override any of the CSS with your own. Also, if you’d like to implement your own loader, simply remove the `progressBarOn` key from your initialization data object or set it to `false`.
 
+**_NOTE:_** When submitting stamp data via a normal HTTP POST, and redirecting to another page upon a successful stamp interaction, you will want to ensure that the progress bar animation is removed if a user returns to the stamp screen using the browser's _back_ button. To ensure compatibility on the largest number of mobile browsers, we suggest adding the following code below your `jquery.snowshoe.js` reference.
+
+```javascript
+<script>
+  window.onpopstate=function(){
+    $('#snowshoe-progress-bar').removeClass("snowshoe-progress-bar");
+  };
+</script>
+```   
+
 ### Help Messages
 If a user is having trouble with their stamp, displaying help messages to them can be useful. With our new Stamp 2.0 hardware, it helps to stamp and hold for a couple seconds on some devices. We've added dynamic messaging to this module allowing you to display custom messaging onscreen that will guide users toward best stamping practices.
 
@@ -110,7 +120,7 @@ If a user is having trouble with their stamp, displaying help messages to them c
 <div id="snowshoe-messages"></div>
 ```
 
-3\. To add helpful messaging for when a user isn't touching the stamp to the screen fully, insert an html block in the initialization data. First, a user will see a "Keep holding" message for 2 seconds, followed by whatever you place here.
+3\. To add helpful messaging for when a user isn't touching the stamp to the screen fully, insert an html block in the initialization data in the format referenced below. First, a user will see a `userTraining` message for 2 seconds (instructs them to hold the stamp on the screen), followed by an `insufficientPoints` message (informs them to lift the stamp and try again). We used `<h3>` tags in the example but feel free to use any html you would like. It will be dynamically appended to the `<div>` with the id of `#snowshoe-messages`.
 
 ```javascript
 <script>
@@ -119,6 +129,7 @@ var stampScreenInitData = {
   "stampScreenElmId": "stamp-screen",
   "progressBarOn": true,
   "messages": {
+    "userTraining" : "<h3>Keep holding</h3>",
     "insufficientPoints" : "<h3>Try again!</h3>"
   }
 }
@@ -135,6 +146,7 @@ var stampScreenInitData = {
   "stampScreenElmId": "stamp-screen",
   "progressBarOn": true,
   "messages": {
+    "userTraining" : "<h3>Keep holding</h3>",
     "insufficientPoints" : "<h3>Try again!</h3>"
   },
   "postViaAjax": true,

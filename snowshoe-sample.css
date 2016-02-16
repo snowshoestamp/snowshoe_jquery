@@ -14,56 +14,22 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #snowshoe-messages {
   position: absolute;
   text-align: center;
-  width: 100%;
+  width: 100%; 
   top: 10%;
 }
 .snowshoe-progress-bar {
-  display: block;
-  width: 1em;
-  height: 1em;
-  border-radius: 1em;
-  background-color: #fff;
-  position: absolute;
-  top: -90%;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 1em;
-  height: 1em;
-  -webkit-animation: dim 0.5s 0.5s infinite alternate;
-  -moz-animation: dim 0.5s 0.5s infinite alternate;
-  -o-animation: dim 0.5s 0.5s infinite alternate;
-  animation: dim 0.5s 0.5s infinite alternate;
+    background: rgba(255,255,255,.9);
+    -webkit-border-radius: 30px;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left:0;
+    top:0;
+    -webkit-animation: pulsate 1.1s ease-out;
+    -webkit-animation-iteration-count: infinite; 
+    opacity: 0.0
 }
-.snowshoe-progress-bar:before {
-  content: '';
-  position: absolute;
-  display: block;
-  width: 1em;
-  height: 1em;
-  border-radius: 1em;
-  background-color: #fff;
-  right: 1.5em;
-  -webkit-animation: dim 1s infinite alternate;
-  -moz-animation: dim 1s infinite alternate;
-  -o-animation: dim 1s infinite alternate;
-  animation: dim 1s infinite alternate;
-}
-.snowshoe-progress-bar:after {
-  content: '';
-  position: absolute;
-  display: block;
-  width: 1em;
-  height: 1em;
-  border-radius: 1em;
-  background-color: #fff;
-  left: 1.5em;
-  -webkit-animation: dim 1s 1s infinite alternate;
-  -moz-animation: dim 1s 1s infinite alternate;
-  -o-animation: dim 1s 1s infinite alternate;
-  animation: dim 1s 1s infinite alternate;
-}
+
 /* Keyframes */
 @-moz-keyframes dim {
   from {
@@ -96,4 +62,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   to {
     background-color: rgba(255,255,255,0.2);
   }
+}
+
+
+@-webkit-keyframes pulsate {
+    0% {-webkit-transform: scale(0.7, 0.4); opacity: 0.0;}
+    50% {opacity: 1.0;}
+    100% {-webkit-transform: scale(1.2, 1.2); opacity: 0.0;}
 }

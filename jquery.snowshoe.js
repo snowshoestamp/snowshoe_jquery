@@ -1,7 +1,7 @@
 /*
 Snowshoe jQuery (https://github.com/snowshoestamp/snowshoe_jquery)
 jquery.snowshoe.js
-Version 0.2.1
+Version 0.3.0
 See GitHub project page for Documentation and License
 */
 
@@ -10,10 +10,11 @@ See GitHub project page for Documentation and License
     stampScreen: {
       init: function(configs, client){
         var stampScreenElmId = configs.stampScreenElmId || "snowshoe-stamp-screen";
-        var progressBarOn = configs.progressBarOn || false;
+        var progressAnimationOn = configs.progressBarOn || false;
         var postViaAjax = configs.postViaAjax || false;
         var messages = configs.messages || {};
         var helpMessage = messages.insufficientPoints || "";
+        var holdMessage = messages.userTraining || "";
         var postUrl = configs.postUrl || "/stampscreen";
         var success = configs.success || {};
         var error = configs.error || {};
@@ -21,8 +22,6 @@ See GitHub project page for Documentation and License
         var points = [];
         var stampScreenElm = document.getElementById(stampScreenElmId);
         var stampTouching = false;
-        var pollOpen = false;
-		
 		// override complete function to reset stampTouching if passed from configuration
 		var confComplete = complete;
 		complete = function() {
@@ -30,12 +29,16 @@ See GitHub project page for Documentation and License
 		  stampTouching=false;
 		  return confComplete;
 		}
-		
+        var pointsMin = configs.insufficientPointsMin || 3;
+        var holdMsg;
+
         stampScreenElm.addEventListener('touchstart', function(event) {
           $("#snowshoe-messages").empty();
-          if (event.touches.length == 4 && helpMessage) {
-            $("#snowshoe-messages").append(helpMessage);
+          clearTimeout(holdMsg);
+          if (event.touches.length >= pointsMin && progressAnimationOn) {
+            $('#snowshoe-progress-bar').addClass("snowshoe-progress-bar");
           };
+
           if (event.touches.length >= 5) {
             var data = [];
             var touches = event.touches;
@@ -45,12 +48,20 @@ See GitHub project page for Documentation and License
               }
             }
             send(data, postViaAjax);
-            if(progressBarOn){showSpinner()};
+          }
+
+          if (event.touches.length < 5 && event.touches.length >= pointsMin ) {
+            $('#snowshoe-progress-bar').removeClass("snowshoe-progress-bar");
+            // Teach users to stamp and hold for 2 seconds before displaying user-defined message
+            if (helpMessage) { 
+              $("#snowshoe-messages").append(holdMessage);
+              holdMsg = setTimeout(function(){ displayCustomMessage(helpMessage) }, 2000);
+            }
           }
         });
 
-        function showSpinner() {
-            $('#snowshoe-progress-bar').addClass("snowshoe-progress-bar");
+        function displayCustomMessage(helpMsg) {
+          $("#snowshoe-messages").children().replaceWith(helpMsg);
         };
 
         function send(points, postViaAjax){

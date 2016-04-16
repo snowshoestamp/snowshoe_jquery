@@ -18,8 +18,17 @@ See GitHub project page for Documentation and License
         var postUrl = configs.postUrl || "/stampscreen";
         var success = configs.success || {};
         var error = configs.error || {};
+        var complete = configs.complete || {};
         var points = [];
         var stampScreenElm = document.getElementById(stampScreenElmId);
+        var stampTouching = false;
+		// override complete function to reset stampTouching if passed from configuration
+		var confComplete = complete;
+		complete = function() {
+		  confComplete.apply(this, arguments);
+		  stampTouching=false;
+		  return confComplete;
+		}
         var pointsMin = configs.insufficientPointsMin || 3;
         var holdMsg;
 
@@ -56,8 +65,11 @@ See GitHub project page for Documentation and License
         };
 
         function send(points, postViaAjax){
+          // return if already one process is working out
+          if(stampTouching) return false;
+          stampTouching=true;
           if (postViaAjax){
-            client.postAjax(points, postUrl, success, error);
+            client.postAjax(points, postUrl, success, error,complete);
           } else {
             client.post(points, postUrl);
           }
@@ -69,7 +81,7 @@ See GitHub project page for Documentation and License
       //
       // Coupled to $.snowshoe.Base64
       //
-      postAjax: function(data, endpoint, cbk, cbkError) {
+      postAjax: function(data, endpoint, cbk, cbkError,cbkComplete) {
         $.ajax({
           'url': endpoint,
           'data': "data=" + $.snowshoe.Base64.encode(JSON.stringify(data)),
@@ -79,7 +91,11 @@ See GitHub project page for Documentation and License
           },
           'success': function(response) {
             cbk(response);
-          }
+          },
+          'complete': function(response){
+			cbkComplete(response);
+			
+		  }
         })
       },
 

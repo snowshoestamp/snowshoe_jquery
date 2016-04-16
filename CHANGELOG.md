@@ -1,3 +1,6 @@
+## 0.3.2
+* Updated documentation on README.md for complete callback
+
 ## 0.3.1
 * Hold off multiple post requests
 

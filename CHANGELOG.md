@@ -1,12 +1,9 @@
-## 0.3.3
+## 0.3.2
 * Added config option to prevent scrolling while stamping
 * Added config option to prevent zooming while stamping
 
-## 0.3.2
-* Updated documentation on README.md for complete callback
-
 ## 0.3.1
-* Hold off multiple post requests
+* Avoid sending multiple requests via Ajax until after complete
 
 ## 0.3.0
 * Allow dynamic minimum point detection limit

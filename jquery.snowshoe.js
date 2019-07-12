@@ -1,7 +1,7 @@
 /*
 Snowshoe jQuery (https://github.com/snowshoestamp/snowshoe_jquery)
 jquery.snowshoe.js
-Version 0.3.2
+Version 0.3.3
 See GitHub project page for Documentation and License
 */
 
@@ -12,6 +12,8 @@ See GitHub project page for Documentation and License
         var stampScreenElmId = configs.stampScreenElmId || "snowshoe-stamp-screen";
         var progressAnimationOn = configs.progressBarOn || false;
         var postViaAjax = configs.postViaAjax || false;
+        var preventScrolling = configs.preventScrolling || false;
+        var preventZooming = configs.preventZooming || false;
         var messages = configs.messages || {};
         var helpMessage = messages.insufficientPoints || "";
         var holdMessage = messages.userTraining || "";
@@ -31,6 +33,20 @@ See GitHub project page for Documentation and License
           confComplete.apply(this, arguments);
           stampTouching = false;
           return confComplete;
+        }
+
+        if (preventScrolling) {
+          stampScreenElm.addEventListener('touchmove', function(event) {
+            // Prevent scrolling on this element
+            event.preventDefault();
+          });
+        }
+
+        if (preventZooming) {
+          stampScreenElm.addEventListener('gesturechange', function(event) {
+            // Disable browser zoom
+            event.preventDefault();
+          });
         }
 
         stampScreenElm.addEventListener('touchstart', function (event) {

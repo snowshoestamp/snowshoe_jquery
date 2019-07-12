@@ -3,7 +3,7 @@ Snowshoe jQuery
 Front-end client to submit Snowshoe stamp point data to your backend.
 
 ## Current Version
-- 0.3.2
+- 0.3.3
 
 ## Dependencies
 - jQuery (>= 1.8.x)
@@ -33,7 +33,9 @@ Optionally, post via AJAX and handle success/failure/complete in the client.
 var stampScreenInitData = {
   "postUrl": "http://mydomain.com/stampscreen",
   "stampScreenElmId": "stamp-screen",
-  "postViaAjax": true, // post via Ajax  
+  "postViaAjax": true, // post via Ajax
+  "preventScrolling": true, // prevent scrolling when stamping the stamp area
+  "preventZooming": true, // prevent zooming when stamping the stamp area
   "success": function(response){
     // handle success
     console.log("Success!");
@@ -77,7 +79,9 @@ var stampScreenInitData = {
   "postUrl": "http://mydomain.com/stampscreen",
   "stampScreenElmId": "stamp-screen",
   "progressBarOn": true,
-  "postViaAjax": true, // post via Ajax  
+  "postViaAjax": true, // post via Ajax
+  "preventScrolling": true, // prevent scrolling when stamping the stamp area
+  "preventZooming": true, // prevent zooming when stamping the stamp area
   "success": function(response){
     // handle success
     console.log("Success!");

@@ -1,3 +1,6 @@
+## 0.3.3
+* Resolved issue with ajaxComplete not firing on success
+
 ## 0.3.2
 * Added config option to prevent scrolling while stamping
 * Added config option to prevent zooming while stamping

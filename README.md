@@ -3,7 +3,7 @@ Snowshoe jQuery
 Front-end client to submit Snowshoe stamp point data to your backend.
 
 ## Current Version
-- 0.3.2
+- 0.3.3
 
 ## Dependencies
 - jQuery (>= 1.8.x)
@@ -24,7 +24,7 @@ At the bottom of any page you want to make "stampable", create an object with in
 <script src="jquery.snowshoe.js"></script>
 ```
 
-Optionally, post via AJAX and handle success/failure/complete in the client.
+Optionally, post via AJAX and handle success/failure in the client.
 
 **_NOTE:_** Whenever stamp data is submitted by Ajax, it waits for request completion before generating another Ajax request.
 
@@ -43,10 +43,6 @@ var stampScreenInitData = {
   "error": function(response){
     // handle failure
     console.log(" :-( ");
-  },
-  "complete": function(response){
-    // Do something on complete
-    console.log(" All Done ");
   }
 }
 </script>
@@ -85,15 +81,13 @@ var stampScreenInitData = {
   "success": function(response){
     // handle success
     console.log("Success!");
+    // clear animation
+    $('#snowshoe-progress-bar').removeClass("snowshoe-progress-bar");
   },
   "error": function(response){
     // handle failure
     console.log(" :-( ");
-  },
-  "complete": function(response){
-    // handle complete
-    console.log(" All Done ");
-	// clear animation
+    // clear animation
     $('#snowshoe-progress-bar').removeClass("snowshoe-progress-bar");
   }
 }

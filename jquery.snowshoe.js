@@ -1,7 +1,7 @@
 /*
 Snowshoe jQuery (https://github.com/snowshoestamp/snowshoe_jquery)
 jquery.snowshoe.js
-Version 0.3.2
+Version 0.3.3
 See GitHub project page for Documentation and License
 */
 
@@ -20,19 +20,14 @@ See GitHub project page for Documentation and License
         var postUrl = configs.postUrl || "/stampscreen";
         var success = configs.success || {};
         var error = configs.error || {};
-        var complete = configs.complete || {};
         var points = [];
         var stampScreenElm = document.getElementById(stampScreenElmId);
         var stampTouching = false;
         var pointsMin = configs.insufficientPointsMin || 3;
         var holdMsg;
 
-        // override complete function to reset stampTouching if passed from configuration
-        var confComplete = complete;
         complete = function () {
-          confComplete.apply(this, arguments);
           stampTouching = false;
-          return confComplete;
         }
 
         if (preventScrolling) {
@@ -104,13 +99,12 @@ See GitHub project page for Documentation and License
           'data': "data=" + $.snowshoe.Base64.encode(JSON.stringify(data)),
           'type': "POST",
           'error': function (response) {
+            cbkComplete(response);
             cbkError(response.responseJSON);
           },
           'success': function (response) {
-            cbk(response);
-          },
-          'complete': function (response) {
             cbkComplete(response);
+            cbk(response);
           }
         })
       },
